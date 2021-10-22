@@ -12,8 +12,8 @@ exports.autenticarUsuario = async (req, res) => {
     return res.status(400).json({ errores: errores.array() });
   }
 
-  const { documento, contraseña } = req.body;
-
+  let { documento, contraseña } = req.body;
+  console.log(req.body);
   try {
     //revisar que el usuario si exista
     let usuario = await Usuario.findOne({ documento });
@@ -21,7 +21,7 @@ exports.autenticarUsuario = async (req, res) => {
     if (!usuario) {
       return res.status(400).json({ msg: "EL USUARIO NO EXISTE" });
     }
-    const passCorrecto = false;
+    let passCorrecto = false;
 
     //revisar que el password coincida
     // const passCorrecto = await bcryptjs.compare(contraseña, usuario.contraseña);
